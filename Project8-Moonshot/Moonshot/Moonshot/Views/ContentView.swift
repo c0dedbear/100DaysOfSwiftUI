@@ -15,7 +15,7 @@ struct ContentView: View {
 	var body: some View {
 		NavigationView {
 			List(missions) { mission in
-				NavigationLink(destination: Text("Detail view")) {
+				NavigationLink(destination: MissionView(mission: mission, astronauts: self.astronauts)) {
 					Image(mission.image)
 						.resizable()
 						.aspectRatio(contentMode: .fit)
@@ -28,7 +28,7 @@ struct ContentView: View {
 					}
 				}
 			}
-			.navigationBarTitle("Moonshot")
+			.navigationBarTitle("Moonshot 🌖")
 		}
 	}
 }
