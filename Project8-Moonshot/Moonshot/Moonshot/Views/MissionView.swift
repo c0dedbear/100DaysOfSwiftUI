@@ -15,26 +15,29 @@ struct MissionView: View {
 	}
 
 	let astronauts: [CrewMember]
-    let mission: Mission
+	let mission: Mission
 
-    var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.vertical) {
-                VStack {
-                    Image(self.mission.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: geometry.size.width * 0.7)
-                        .padding(.top)
+	var body: some View {
+		GeometryReader { geometry in
+			ScrollView(.vertical) {
+				VStack {
+					Image(self.mission.image)
+						.resizable()
+						.scaledToFit()
+						.frame(maxWidth: geometry.size.width * 0.7)
+						.padding(.top)
 
-                    Text(self.mission.description)
-                        .padding()
+					Text(self.mission.formattedLaunchDate)
+						.padding()
 
-                    Spacer(minLength: 25)
+					Text(self.mission.description)
+						.padding()
+
+					Spacer(minLength: 25)
 
 					ForEach(self.astronauts, id: \.role) { crewMember in
-							HStack {
-								NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut)) {
+						HStack {
+							NavigationLink(destination: AstronautView(astronaunt: crewMember.astronaut)) {
 								Image(crewMember.astronaut.id)
 									.resizable()
 									.frame(width: 83, height: 60)
@@ -53,11 +56,11 @@ struct MissionView: View {
 						.padding(.horizontal)
 						.buttonStyle(PlainButtonStyle())
 					}
-                }
-            }
-        }
-        .navigationBarTitle(Text(mission.displayName), displayMode: .inline)
-    }
+				}
+			}
+		}
+		.navigationBarTitle(Text(mission.displayName), displayMode: .inline)
+	}
 
 	init(mission: Mission, astronauts: [Astronaut]) {
 		self.mission = mission
@@ -77,10 +80,10 @@ struct MissionView: View {
 }
 
 struct MissionView_Previews: PreviewProvider {
-    static let missions: [Mission] = Bundle.main.decode("missions.json")
-    static let astronauts: [Astronaut] = Bundle.main.decode("astronauts.json")
+	static let missions: [Mission] = Bundle.main.decode("missions.json")
+	static let astronauts: [Astronaut] = Bundle.main.decode("astronauts.json")
 
-    static var previews: some View {
-        MissionView(mission: missions[0], astronauts: astronauts)
-    }
+	static var previews: some View {
+		MissionView(mission: missions[1], astronauts: astronauts)
+	}
 }
