@@ -48,7 +48,9 @@ struct Arc: InsettableShape {
 }
 
 struct ContentView: View {
-    var body: some View {
+	@State private var colorCycle = 0.0
+
+	var body: some View {
         // Rectangle with path
 //		Path { path in
 //			path.move(to: CGPoint(x: 200, y: 100))
@@ -63,9 +65,27 @@ struct ContentView: View {
 //			.frame(width: 300, height: 300)
 
 		// Arc Shape
-		Arc(startAngle: .degrees(0), endAngle: .degrees(300), clockwise: true)
-			.strokeBorder(Color.blue, lineWidth: 10)
-			.frame(width: 300, height: 300)
+//		Arc(startAngle: .degrees(0), endAngle: .degrees(300), clockwise: true)
+//			.strokeBorder(Color.blue, lineWidth: 10)
+//			.frame(width: 300, height: 300)
+
+//		FlowerView()
+
+//		VStack {
+//			ColorCyclingCircle(amount: self.colorCycle)
+//				.frame(width: 300, height: 300)
+//				// boost performance with Metal
+//				.drawingGroup()
+//
+//			Slider(value: $colorCycle)
+//		}
+
+//		ColorBlendingView()
+
+//		AnimatableDataView()
+//		CheckerboardView()
+
+		SpirographView()
     }
 }
 
