@@ -71,21 +71,23 @@ struct ContentView: View {
 
 //		FlowerView()
 
-//		VStack {
-//			ColorCyclingCircle(amount: self.colorCycle)
-//				.frame(width: 300, height: 300)
-//				// boost performance with Metal
-//				.drawingGroup()
-//
-//			Slider(value: $colorCycle)
-//		}
+		VStack {
+			ColorCyclingCircle(amount: self.colorCycle)
+				.frame(width: 300, height: 300)
+				// boost performance with Metal
+				.drawingGroup()
+				.padding()
+			Slider(value: $colorCycle)
+				.padding(.horizontal)
+		}
 
 //		ColorBlendingView()
 
 //		AnimatableDataView()
 //		CheckerboardView()
 
-		SpirographView()
+//		SpirographView()
+//		ArrowView()
     }
 }
 

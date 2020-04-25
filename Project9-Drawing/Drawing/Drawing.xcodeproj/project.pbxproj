@@ -14,6 +14,7 @@
 		E33E7C132452F52100873E23 /* AnimatableDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33E7C122452F52100873E23 /* AnimatableDataView.swift */; };
 		E33E7C152452FB9200873E23 /* CheckerboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33E7C142452FB9200873E23 /* CheckerboardView.swift */; };
 		E33E7C172452FC7900873E23 /* SpirographView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33E7C162452FC7900873E23 /* SpirographView.swift */; };
+		E33E7C192454764800873E23 /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33E7C182454764800873E23 /* ArrowView.swift */; };
 		E397EF3F24500B34008AFEB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E397EF3E24500B34008AFEB0 /* AppDelegate.swift */; };
 		E397EF4124500B34008AFEB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E397EF4024500B34008AFEB0 /* SceneDelegate.swift */; };
 		E397EF4324500B34008AFEB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E397EF4224500B34008AFEB0 /* ContentView.swift */; };
@@ -30,6 +31,7 @@
 		E33E7C122452F52100873E23 /* AnimatableDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableDataView.swift; sourceTree = "<group>"; };
 		E33E7C142452FB9200873E23 /* CheckerboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerboardView.swift; sourceTree = "<group>"; };
 		E33E7C162452FC7900873E23 /* SpirographView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpirographView.swift; sourceTree = "<group>"; };
+		E33E7C182454764800873E23 /* ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
 		E397EF3B24500B34008AFEB0 /* Drawing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drawing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E397EF3E24500B34008AFEB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E397EF4024500B34008AFEB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				E33E7C142452FB9200873E23 /* CheckerboardView.swift */,
 				E33E7C162452FC7900873E23 /* SpirographView.swift */,
 				E33E7C0E2451E00700873E23 /* ColorCyclingCircle.swift */,
+				E33E7C182454764800873E23 /* ArrowView.swift */,
 				E397EF4424500B37008AFEB0 /* Assets.xcassets */,
 				E397EF4924500B37008AFEB0 /* LaunchScreen.storyboard */,
 				E397EF4C24500B37008AFEB0 /* Info.plist */,
@@ -173,6 +176,7 @@
 				E33E7C152452FB9200873E23 /* CheckerboardView.swift in Sources */,
 				E33E7C0B2451D86D00873E23 /* FlowerView.swift in Sources */,
 				E33E7C0D2451DA4D00873E23 /* BordersWithImage.swift in Sources */,
+				E33E7C192454764800873E23 /* ArrowView.swift in Sources */,
 				E397EF4124500B34008AFEB0 /* SceneDelegate.swift in Sources */,
 				E397EF4324500B34008AFEB0 /* ContentView.swift in Sources */,
 				E33E7C132452F52100873E23 /* AnimatableDataView.swift in Sources */,
