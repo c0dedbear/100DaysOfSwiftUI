@@ -20,7 +20,7 @@ struct ContentView: View {
 						ForEach(0..<Order.types.count, id: \.self) {
 							Text(Order.types[$0])
 						}
-					})
+					}
 
 					Stepper(value: $order.quantity, in: 3...20) {
 						Text("Number of cakes: \(order.quantity)")
