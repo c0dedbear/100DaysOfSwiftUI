@@ -37,7 +37,19 @@ final class Order: ObservableObject, Codable {
 	@Published var zip = ""
 
 	var hasValidAddress: Bool {
-		if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty {
+		let isEmpty = name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty
+		let isNameContainsNumbersOrSymbols = name.contains(where: { $0.isNumber || $0.isSymbol})
+		let isCityisNameContainsNumbersOrSymbols = city.contains(where: { $0.isNumber || $0.isSymbol})
+		let isZipContainsLetter = zip.contains(where: { $0.isLetter })
+
+		if isEmpty
+			|| isNameContainsNumbersOrSymbols
+			|| isCityisNameContainsNumbersOrSymbols
+			|| isZipContainsLetter
+			|| hasInvalidWhiteSpaces(name)
+			|| hasInvalidWhiteSpaces(streetAddress)
+			|| hasInvalidWhiteSpaces(city)
+			|| hasInvalidWhiteSpaces(zip) {
 			return false
 		}
 
@@ -105,5 +117,9 @@ final class Order: ObservableObject, Codable {
 		streetAddress = try container.decode(String.self, forKey: .streetAddress)
 		city = try container.decode(String.self, forKey: .city)
 		zip = try container.decode(String.self, forKey: .zip)
+	}
+
+	private func hasInvalidWhiteSpaces(_ string: String) -> Bool {
+		return string.hasSuffix(" ") || string.hasPrefix(" ")
 	}
 }
