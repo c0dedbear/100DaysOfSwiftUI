@@ -13,6 +13,12 @@ struct DetailView: View {
 	@Environment(\.managedObjectContext) var moc
 	@Environment(\.presentationMode) var presentationMode
 	@State private var showingDeleteAlert = false
+	private var formattedDateString: String {
+		guard let date = book.date else { return "Unknown date" }
+		let formatter = DateFormatter()
+		formatter.dateStyle = .medium
+		return formatter.string(from: date)
+	}
 
 	let book: Book
 
@@ -20,8 +26,9 @@ struct DetailView: View {
 		GeometryReader { geometry in
 			VStack {
 				ZStack(alignment: .bottomTrailing) {
-					Image(self.book.genre ?? "Fantasy")
-						.frame(maxWidth: geometry.size.width)
+					Image(self.book.genre ?? "Unknown")
+						.resizable()
+						.frame(maxWidth: geometry.size.width, maxHeight: geometry.size.width / 2)
 
 					Text(self.book.genre?.uppercased() ?? "FANTASY")
 						.font(.caption)
@@ -39,6 +46,8 @@ struct DetailView: View {
 
 				Text(self.book.review ?? "No review")
 					.padding()
+
+				Text("Date added: \(self.formattedDateString)").padding()
 
 				RatingView(rating: .constant(Int(self.book.rating)))
 					.font(.largeTitle)
