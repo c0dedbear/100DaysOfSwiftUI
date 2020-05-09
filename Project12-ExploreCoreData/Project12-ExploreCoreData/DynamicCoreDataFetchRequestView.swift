@@ -15,7 +15,7 @@ struct DynamicCoreDataFetchRequestView: View {
     var body: some View {
         VStack {
 			// list of matching singers
-			FilteredList(filterKey: "lastName", filterValue: lastNameFilter) { (singer: SInger) in
+			FilteredList(filterKey: "lastName", filterValue: lastNameFilter, sortDescriptors: [NSSortDescriptor(keyPath: \SInger.lastName, ascending: false)], predicate: .beginsWith) { (singer: SInger) in
 				Text("\(singer.wrappedFirstName) \(singer.wrappedLastName)")
 			}
 

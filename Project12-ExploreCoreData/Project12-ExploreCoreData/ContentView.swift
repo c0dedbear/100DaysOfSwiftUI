@@ -86,8 +86,8 @@ struct ContentView: View {
 //                try? self.moc.save()
 //            }
 //        }
-//		DynamicCoreDataFetchRequestView()
-		CountriesCandiesView()
+		DynamicCoreDataFetchRequestView()
+//		CountriesCandiesView()
     }
 }
 
