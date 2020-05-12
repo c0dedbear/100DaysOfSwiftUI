@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
+		// TODO: Create and connect CoreData Entities
 	@State private var users = [User]()
 
 	var body: some View {
