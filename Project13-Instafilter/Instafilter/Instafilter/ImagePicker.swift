@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
+	@Environment(\.presentationMode) var presentationMode
+	@Binding var image: UIImage?
+
 	final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 		let parent: ImagePicker
 
@@ -23,9 +26,6 @@ struct ImagePicker: UIViewControllerRepresentable {
 			parent.presentationMode.wrappedValue.dismiss()
 		}
 	}
-
-	@Environment(\.presentationMode) var presentationMode
-	@Binding var image: UIImage?
 
 	func makeCoordinator() -> Coordinator {
 		  Coordinator(self)
