@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E379B834246C4E9800CB8536 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E379B833246C4E9800CB8536 /* ImageSaver.swift */; };
 		E98A01F2246B1630001DAD49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A01F1246B1630001DAD49 /* AppDelegate.swift */; };
 		E98A01F4246B1630001DAD49 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A01F3246B1630001DAD49 /* SceneDelegate.swift */; };
 		E98A01F6246B1630001DAD49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98A01F5246B1630001DAD49 /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E379B833246C4E9800CB8536 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		E98A01EE246B1630001DAD49 /* Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instafilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98A01F1246B1630001DAD49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E98A01F3246B1630001DAD49 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				E98A01F1246B1630001DAD49 /* AppDelegate.swift */,
 				E98A01F3246B1630001DAD49 /* SceneDelegate.swift */,
 				E98A01F5246B1630001DAD49 /* ContentView.swift */,
+				E379B833246C4E9800CB8536 /* ImageSaver.swift */,
 				E98A0205246B2027001DAD49 /* ImagePicker.swift */,
 				E98A01F7246B1633001DAD49 /* Assets.xcassets */,
 				E98A01FC246B1633001DAD49 /* LaunchScreen.storyboard */,
@@ -151,6 +154,7 @@
 			files = (
 				E98A01F2246B1630001DAD49 /* AppDelegate.swift in Sources */,
 				E98A0206246B2027001DAD49 /* ImagePicker.swift in Sources */,
+				E379B834246C4E9800CB8536 /* ImageSaver.swift in Sources */,
 				E98A01F4246B1630001DAD49 /* SceneDelegate.swift in Sources */,
 				E98A01F6246B1630001DAD49 /* ContentView.swift in Sources */,
 			);
