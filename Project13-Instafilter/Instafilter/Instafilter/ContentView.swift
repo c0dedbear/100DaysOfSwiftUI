@@ -15,21 +15,33 @@ struct ContentView: View {
 	@State private var processedImage: UIImage?
 	@State private var image: Image?
 	@State private var filterIntensity = 0.5
+	@State private var filterScale = 0.5
+	@State private var filterRadius = 0.5
 	@State private var showingImagePicker = false
 	@State private var showingFilterSheet = false
+	@State private var showingAlert = false
 
 	@State private var currentFilter: CIFilter = CIFilter.sepiaTone()
 	private let context = CIContext()
 
 	var body: some View {
-		let intensity = Binding<Double> (
-			get: {
-				self.filterIntensity
-		}, set: {
-			self.filterIntensity = $0
-			self.applyProcessing()
-		}
-		)
+		let intensity = Binding<Double> (get: { self.filterIntensity},
+										 set: {
+											self.filterIntensity = $0
+											self.applyProcessing()
+		})
+
+		let radius = Binding<Double> (get: { self.filterRadius},
+										 set: {
+											self.filterRadius = $0
+											self.applyProcessing()
+		})
+
+		let scale = Binding<Double> (get: { self.filterScale},
+										 set: {
+											self.filterScale = $0
+											self.applyProcessing()
+		})
 		return NavigationView {
 			VStack {
 				ZStack {
@@ -56,14 +68,27 @@ struct ContentView: View {
 				}.padding(.vertical)
 
 				HStack {
-					Button("Change Filter") {
+					Text("Radius")
+					Slider(value: radius)
+				}.padding(.vertical)
+
+				HStack {
+					Text("Scale")
+					Slider(value: scale)
+				}.padding(.vertical)
+
+				HStack {
+					Button(currentFilter.name.dropFirst(2)) {
 						self.showingFilterSheet = true
 					}
 
 					Spacer()
 
 					Button("Save") {
-						guard let processedImage = self.processedImage else { return }
+						guard let processedImage = self.processedImage else {
+							self.showingAlert = true
+							return
+						}
 
 						let imageSaver = ImageSaver()
 
@@ -92,6 +117,11 @@ struct ContentView: View {
 				.cancel()
 			])
 		}
+		.alert(isPresented: $showingAlert) {
+			Alert(title: Text("Ooops"),
+				  message: Text("There is no image to save"),
+				  dismissButton: .cancel())
+		}
 	}
 
 	func loadImage() {
@@ -111,8 +141,8 @@ struct ContentView: View {
 		let inputKeys = currentFilter.inputKeys
 
 		if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey) }
-		if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey) }
-		if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey) }
+		if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterRadius * 200, forKey: kCIInputRadiusKey) }
+		if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterScale * 10, forKey: kCIInputScaleKey) }
 
 		guard let outputImage = currentFilter.outputImage else { return }
 
