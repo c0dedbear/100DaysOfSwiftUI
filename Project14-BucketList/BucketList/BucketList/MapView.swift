@@ -47,17 +47,17 @@ struct MapView: UIViewRepresentable {
 		}
 
 		func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-			guard let placemark = view.annotation as? MKPointAnnotation else { return }
+			guard let placemark = view.annotation as? CodableMKPointAnnotation else { return }
 
 			parent.selectedPlace = placemark
 			parent.showingPlaceDetails = true
 		}
     }
 
-	@Binding var selectedPlace: MKPointAnnotation?
+	@Binding var selectedPlace: CodableMKPointAnnotation?
 	@Binding var showingPlaceDetails: Bool
 	@Binding var centerCoordinate: CLLocationCoordinate2D
-	var annotations: [MKPointAnnotation]
+	var annotations: [CodableMKPointAnnotation]
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()

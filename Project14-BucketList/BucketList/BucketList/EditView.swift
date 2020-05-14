@@ -16,7 +16,7 @@ struct EditView: View {
 	}
 
 	@Environment(\.presentationMode) var presentationMode
-    @ObservedObject var placemark: MKPointAnnotation
+    @ObservedObject var placemark: CodableMKPointAnnotation
 	@State private var loadingState = LoadingState.loading
 	@State private var pages = [Page]()
 
@@ -79,8 +79,8 @@ struct EditView: View {
 	}
 }
 
-struct EditView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditView(placemark: MKPointAnnotation.example)
-    }
-}
+//struct EditView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditView(placemark: CodableMKPointAnnotation.example)
+//    }
+//}

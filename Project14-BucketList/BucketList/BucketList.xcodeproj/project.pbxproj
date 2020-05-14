@@ -14,7 +14,7 @@
 		E9C4D61A246D803D004B9082 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9C4D619246D803D004B9082 /* Preview Assets.xcassets */; };
 		E9C4D61D246D803D004B9082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C4D61B246D803D004B9082 /* LaunchScreen.storyboard */; };
 		E9C4D625246D8C46004B9082 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4D624246D8C46004B9082 /* MapView.swift */; };
-		E9C4D627246D9AD8004B9082 /* MKPointAnnotation-ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4D626246D9AD8004B9082 /* MKPointAnnotation-ObservableObject.swift */; };
+		E9C4D627246D9AD8004B9082 /* CodableMKPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4D626246D9AD8004B9082 /* CodableMKPointAnnotation.swift */; };
 		E9C4D629246D9B07004B9082 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4D628246D9B07004B9082 /* EditView.swift */; };
 		E9C4D62B246D9CB1004B9082 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4D62A246D9CB1004B9082 /* Result.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		E9C4D61C246D803D004B9082 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9C4D61E246D803D004B9082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9C4D624246D8C46004B9082 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		E9C4D626246D9AD8004B9082 /* MKPointAnnotation-ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-ObservableObject.swift"; sourceTree = "<group>"; };
+		E9C4D626246D9AD8004B9082 /* CodableMKPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMKPointAnnotation.swift; sourceTree = "<group>"; };
 		E9C4D628246D9B07004B9082 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		E9C4D62A246D9CB1004B9082 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +73,7 @@
 				E9C4D61B246D803D004B9082 /* LaunchScreen.storyboard */,
 				E9C4D61E246D803D004B9082 /* Info.plist */,
 				E9C4D618246D803D004B9082 /* Preview Content */,
-				E9C4D626246D9AD8004B9082 /* MKPointAnnotation-ObservableObject.swift */,
+				E9C4D626246D9AD8004B9082 /* CodableMKPointAnnotation.swift */,
 				E9C4D628246D9B07004B9082 /* EditView.swift */,
 			);
 			path = BucketList;
@@ -163,7 +163,7 @@
 				E9C4D629246D9B07004B9082 /* EditView.swift in Sources */,
 				E9C4D613246D803B004B9082 /* SceneDelegate.swift in Sources */,
 				E9C4D62B246D9CB1004B9082 /* Result.swift in Sources */,
-				E9C4D627246D9AD8004B9082 /* MKPointAnnotation-ObservableObject.swift in Sources */,
+				E9C4D627246D9AD8004B9082 /* CodableMKPointAnnotation.swift in Sources */,
 				E9C4D615246D803B004B9082 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
