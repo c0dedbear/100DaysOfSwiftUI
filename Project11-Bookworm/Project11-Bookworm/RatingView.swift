@@ -33,6 +33,7 @@ struct RatingView: View {
 					.onTapGesture {
 						self.rating = number
 				}
+				.accessibility(addTraits: number > self.rating ? .isButton : [.isButton, .isSelected])
 			}
 		}
     }

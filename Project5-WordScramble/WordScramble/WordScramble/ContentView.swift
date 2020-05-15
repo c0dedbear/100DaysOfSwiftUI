@@ -21,21 +21,20 @@ struct ContentView: View {
     
     
     var body: some View {
-        //        if let fileUrl = Bundle.main.url(forResource: "", withExtension: "txt") {
-        //            if let file = try? String(contentsOf: fileUrl) {
-        //
-        //            }
-        //        }
         NavigationView {
-            VStack {
-                TextField("Enter a word", text: $newWord, onCommit: addNewWord).autocapitalization(.none)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                List(usedWords, id: \.self) {
-                    Image(systemName: "\($0.count).circle")
-                    Text($0)
-                }
+			VStack {
+				TextField("Enter a word", text: $newWord, onCommit: addNewWord).autocapitalization(.none)
+					.textFieldStyle(RoundedBorderTextFieldStyle())
+					.padding()
+
+				List(usedWords, id: \.self) { word in
+					HStack {
+						Image(systemName: "\(word.count).circle")
+						Text(word)
+					}
+					.accessibilityElement(children: .ignore)
+					.accessibility(label: Text("\(word), \(word.count) letters"))
+			}
                 
                 Text("Score: \(score)").font(.title).foregroundColor(.orange).bold()
             }
