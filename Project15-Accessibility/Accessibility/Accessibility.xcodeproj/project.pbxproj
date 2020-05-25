@@ -286,14 +286,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Accessibility/Preview Content\"";
-				DEVELOPMENT_TEAM = M2GUXW2QMT;
+				DEVELOPMENT_TEAM = X4UC9B8S3E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Accessibility/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codedbear.Accessibility;
+				PRODUCT_BUNDLE_IDENTIFIER = codedbear.Accessibility1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,14 +306,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Accessibility/Preview Content\"";
-				DEVELOPMENT_TEAM = M2GUXW2QMT;
+				DEVELOPMENT_TEAM = X4UC9B8S3E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Accessibility/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codedbear.Accessibility;
+				PRODUCT_BUNDLE_IDENTIFIER = codedbear.Accessibility1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
