@@ -31,11 +31,17 @@ struct EditView: View {
 				Section(header: Text("Nearby…")) {
 					if loadingState == .loaded {
 						List(pages, id: \.pageid) { page in
+							VStack {
 							Text(page.title)
 								.font(.headline)
 							+ Text(": ") +
 								Text(page.description)
 								.italic()
+							}.onTapGesture {
+								self.placemark.title = page.title
+								self.placemark.subtitle = page.description
+								self.presentationMode.wrappedValue.dismiss()
+							}
 						}
 					} else if loadingState == .loading {
 						Text("Loading…")
