@@ -11,6 +11,7 @@ import SwiftUI
 struct ImagePicker: UIViewControllerRepresentable {
 	@Environment(\.presentationMode) var presentationMode
 	@Binding var image: UIImage?
+	var completion: () -> Void?
 
 	final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 		let parent: ImagePicker
@@ -23,12 +24,13 @@ struct ImagePicker: UIViewControllerRepresentable {
 			if let uiImage = info[.originalImage] as? UIImage {
 				parent.image = uiImage
 			}
+			parent.completion()
 			parent.presentationMode.wrappedValue.dismiss()
 		}
 	}
 
 	func makeCoordinator() -> Coordinator {
-		  Coordinator(self)
+		Coordinator(self)
 	}
 
 	func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {

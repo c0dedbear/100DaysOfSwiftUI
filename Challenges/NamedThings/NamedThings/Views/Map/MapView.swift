@@ -57,7 +57,9 @@ struct MapView: UIViewRepresentable {
 	@Binding var selectedPlace: CodableMKPointAnnotation?
 	@Binding var showingPlaceDetails: Bool
 	@Binding var centerCoordinate: CLLocationCoordinate2D
-	var annotations: [CodableMKPointAnnotation]
+	@Binding var isRegionChanged: Bool
+
+	var annotation: CodableMKPointAnnotation?
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -66,10 +68,20 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ view: MKMapView, context: Context) {
-		if annotations.count != view.annotations.count {
+		if isRegionChanged {
+			let center = centerCoordinate
+			let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+				view.setRegion(region, animated: true)
+			DispatchQueue.main.async {
+				self.isRegionChanged = false
+			}
+		}
+		if let annotation = self.annotation {
 			 view.removeAnnotations(view.annotations)
-			 view.addAnnotations(annotations)
-		 }
+			 view.addAnnotations([annotation])
+		} else {
+			view.removeAnnotations(view.annotations)
+		}
     }
 
     func makeCoordinator() -> Coordinator {
@@ -77,15 +89,15 @@ struct MapView: UIViewRepresentable {
     }
 }
 
-extension MKPointAnnotation {
-    static var example: MKPointAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.title = "London"
-        annotation.subtitle = "Home to the 2012 Summer Olympics."
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.13)
-        return annotation
-    }
-}
+//extension MKPointAnnotation {
+//    static var example: MKPointAnnotation {
+//        let annotation = MKPointAnnotation()
+//        annotation.title = "London"
+//        annotation.subtitle = "Home to the 2012 Summer Olympics."
+//        annotation.coordinate = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.13)
+//        return annotation
+//    }
+//}
 
 //struct MapView_Previews: PreviewProvider {
 //    static var previews: some View {

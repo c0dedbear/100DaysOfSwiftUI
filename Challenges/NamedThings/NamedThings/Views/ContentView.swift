@@ -9,13 +9,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        PhotoCardView()
-    }
+	var body: some View {
+		ZStack {
+		PhotoCards()
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+	}
 }
