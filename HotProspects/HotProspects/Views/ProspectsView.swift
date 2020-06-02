@@ -15,8 +15,15 @@ struct ProspectsView: View {
 		case none, contacted, uncontacted
 	}
 
+	enum SortingOrder {
+		case name
+		case recent
+	}
+
 	@EnvironmentObject private var prospects: Prospects
 	@State private var isShowingScanner = false
+
+	@State private var sortingOrder = SortingOrder.recent
 
 	var filteredProspects: [Prospect] {
 		switch filter {
@@ -46,18 +53,42 @@ struct ProspectsView: View {
       NavigationView {
 			List {
 				ForEach(filteredProspects) { prospect in
+					HStack {
 					VStack(alignment: .leading) {
 						Text(prospect.name)
 							.font(.headline)
 						Text(prospect.emailAddress)
 							.foregroundColor(.secondary)
+						}
+						if prospect.isContacted {
+						Spacer()
+						Image(systemName: "person.crop.circle.badge.checkmark")
+						}
 					}.contextMenu {
-						Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted" ) {
-							self.prospects.toggle(prospect)
+						Button(action: { self.prospects.toggle(prospect)}) {
+							Text(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted")
+							Image(systemName: prospect.isContacted ? "person.crop.circle.badge.minus" : "person.crop.circle.badge.checkmark")
+
 						}
 						if !prospect.isContacted {
-							Button("Remind Me") {
-								self.addNotification(for: prospect)
+							Button(action: { self.addNotification(for: prospect) }) {
+								Text("Remind Me")
+								Image(systemName: "bell")
+
+							}
+						}
+
+						if self.sortingOrder == .name {
+							Button("Sort by recents 🕐" ) {
+								self.prospects.sort { $0.date < $1.date }
+								self.sortingOrder = .recent
+							}
+						}
+
+						if self.sortingOrder == .recent {
+							Button("Sort by name 💱" ) {
+								self.prospects.sort { $0.name.caseInsensitiveCompare($1.name) == .orderedAscending }
+								self.sortingOrder = .name
 							}
 						}
 					}

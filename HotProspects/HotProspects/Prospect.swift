@@ -10,6 +10,7 @@ import SwiftUI
 
 final class Prospect: Identifiable, Codable {
     let id = UUID()
+	let date = Date()
     var name = "Anonymous"
     var emailAddress = ""
     fileprivate(set) var isContacted = false
@@ -21,14 +22,18 @@ final class Prospects: ObservableObject {
 	@Published private(set) var people: [Prospect]
 
 	init() {
-		if let data = UserDefaults.standard.data(forKey: Self.saveKey) {
-			if let decoded = try? JSONDecoder().decode([Prospect].self, from: data) {
-				self.people = decoded
-				return
-			}
-		}
-
 		self.people = []
+		guard let data = try? Data(contentsOf: archiveURL) else { return }
+		let decoder = PropertyListDecoder()
+		if let people = try? decoder.decode([Prospect].self, from: data) {
+			self.people = people
+		}
+	}
+
+	func sort(by condition: (Prospect, Prospect) throws -> Bool) {
+		if let sorted = try? self.people.sorted(by: condition) {
+			self.people = sorted
+		}
 	}
 
 	func add(_ prospect: Prospect) {
@@ -41,10 +46,28 @@ final class Prospects: ObservableObject {
 		prospect.isContacted.toggle()
 		self.save()
 	}
+}
 
-	private func save() {
-		if let encoded = try? JSONEncoder().encode(people) {
-			UserDefaults.standard.set(encoded, forKey: Self.saveKey)
+private extension Prospects {
+	private var archiveURL: URL {
+		getDocumentsDirectory()
+			.appendingPathComponent(Self.saveKey)
+			.appendingPathExtension("plist")
+	}
+
+	private func getDocumentsDirectory() -> URL {
+		let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+		return paths[0]
+	}
+
+	func save() {
+		let encoder = PropertyListEncoder()
+		guard let cards = try? encoder.encode(people) else { return }
+		do {
+			try cards.write(to: archiveURL, options: .noFileProtection)
+		}
+		catch {
+			assertionFailure(error.localizedDescription)
 		}
 
 	}
