@@ -6,7 +6,7 @@
 //  Copyright © 2020 Михаил Медведев. All rights reserved.
 //
 
-struct Card {
+struct Card: Codable {
     let prompt: String
     let answer: String
 

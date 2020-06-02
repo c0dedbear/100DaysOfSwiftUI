@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct CardView: View {
+	@State private var feedback = UINotificationFeedbackGenerator()
 	@State private var offset = CGSize.zero
 	@State private var isShowingAnswer = false
 	@Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
+	@Environment(\.accessibilityEnabled) var accessibilityEnabled
 
 	let card: Card
 	var removal: (() -> Void)? = nil
@@ -34,40 +36,56 @@ struct CardView: View {
 			)
 			.shadow(radius: 10)
 
-            VStack {
-                Text(card.prompt)
-                    .font(.largeTitle)
-                    .foregroundColor(.black)
+			VStack {
+				if accessibilityEnabled {
+					Text(isShowingAnswer ? card.answer : card.prompt)
+						.font(.largeTitle)
+						.foregroundColor(.black)
+				} else {
+					Text(card.prompt)
+						.font(.largeTitle)
+						.foregroundColor(.black)
 
-            if isShowingAnswer {
-					Text(card.answer)
-						.font(.title)
-						.foregroundColor(.gray)
+					if isShowingAnswer {
+						Text(card.answer)
+							.font(.title)
+							.foregroundColor(.gray)
+					}
 				}
-            }
+			}
             .padding(20)
             .multilineTextAlignment(.center)
-        }.onTapGesture {
-			self.isShowingAnswer.toggle()
-		}
+        }
         .frame(width: 450, height: 250)
 		.rotationEffect(.degrees(Double(offset.width / 5)))
 		.offset(x: offset.width * 5, y: 0)
 		.opacity(2 - Double(abs(offset.width / 50)))
+		.accessibility(addTraits: .isButton)
 		.gesture(
 			DragGesture()
 				.onChanged { gesture in
 					self.offset = gesture.translation
+					self.feedback.prepare()
 				}
 
 				.onEnded { _ in
 					if abs(self.offset.width) > 100 {
+						if self.offset.width > 0 {
+							self.feedback.notificationOccurred(.success)
+						} else {
+							self.feedback.notificationOccurred(.error)
+						}
+
 						self.removal?()
 					} else {
 						self.offset = .zero
 					}
 				}
 		)
+		.onTapGesture {
+			self.isShowingAnswer.toggle()
+		}
+		.animation(.spring())
     }
 }
 
