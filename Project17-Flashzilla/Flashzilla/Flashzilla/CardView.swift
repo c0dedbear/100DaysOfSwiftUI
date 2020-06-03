@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct CardView: View {
-	@State private var feedback = UINotificationFeedbackGenerator()
+	@Binding var feedback: UINotificationFeedbackGenerator
+	@Binding var isCardShouldBack: Bool
 	@State private var offset = CGSize.zero
 	@State private var isShowingAnswer = false
 	@Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
@@ -88,9 +89,9 @@ struct CardView: View {
 		.animation(.spring())
     }
 }
-
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-		CardView(card: Card.example)
-    }
-}
+//
+//struct CardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//		CardView(feedback: $feedback, card: Card.example)
+//    }
+//}

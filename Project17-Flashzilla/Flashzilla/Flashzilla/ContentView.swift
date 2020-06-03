@@ -8,13 +8,22 @@
 
 import SwiftUI
 
+enum ModalScreenState {
+	case add
+	case settings
+}
+
 struct ContentView: View {
 	@Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
 	@Environment(\.accessibilityEnabled) var accessibilityEnabled
+	@State var feedback = UINotificationFeedbackGenerator()
 	@State private var cards = [Card]()
 	@State private var showingEditScreen = false
 	@State private var isActive = true
 	@State private var timeRemaining = 100
+	@State private var modalScreenState = ModalScreenState.add
+	@State var isCardShouldBack = false
+
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
 	var body: some View {
@@ -36,9 +45,13 @@ struct ContentView: View {
 				)
 				ZStack {
 					ForEach(0..<cards.count, id: \.self) { index in
-						CardView(card: self.cards[index]) {
+						CardView(feedback: self.$feedback, isCardShouldBack: self.$isCardShouldBack, card: self.cards[index]) {
 							withAnimation {
-								self.removeCard(at: index)
+								if self.isCardShouldBack {
+									self.cards.swapAt(index, self.cards.count - 1)
+								} else {
+									self.removeCard(at: index)
+								}
 							}
 						}
 						.stacked(at: index, in: self.cards.count)
@@ -57,8 +70,19 @@ struct ContentView: View {
 			}
 			VStack {
 				HStack {
+					Button(action: {
+						self.modalScreenState = .settings
+						self.showingEditScreen = true
+					}) {
+						Image(systemName: "gamecontroller")
+							.padding()
+							.background(Color.black.opacity(0.7))
+							.clipShape(Circle())
+							.padding(.leading, 60)
+					}
 					Spacer()
 					Button(action: {
+						self.modalScreenState = .add
 						self.showingEditScreen = true
 					}) {
 						Image(systemName: "plus.circle")
@@ -70,7 +94,7 @@ struct ContentView: View {
 				}
 
 				Spacer()
-			}
+		}
 			.foregroundColor(.white)
 			.font(.largeTitle)
 			.padding()
@@ -114,12 +138,18 @@ struct ContentView: View {
 		}
 		.onAppear(perform: resetCards)
 		.sheet(isPresented: $showingEditScreen, onDismiss: resetCards) {
+			if self.modalScreenState == .add {
 				EditCards()
+			} else {
+				SettingsView(isCardShouldBack: self.$isCardShouldBack)
+			}
 			}
 		.onReceive(timer) { time in
 			guard self.isActive else { return }
 			if self.timeRemaining > 0 {
 				self.timeRemaining -= 1
+			} else if self.timeRemaining == 0 {
+				self.feedback.notificationOccurred(.warning)
 			}
 		}
 		.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
