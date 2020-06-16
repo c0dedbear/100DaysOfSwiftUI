@@ -9,13 +9,39 @@
 import SwiftUI
 
 struct ContentView: View {
+	enum ResortSorting {
+		case `default`
+		case alphabetical
+		case byCountry
+	}
 	@ObservedObject var favorites = Favorites()
 
-	let resorts: [Resort] = Bundle.main.decode("resorts.json")
+	private let resorts: [Resort] = Bundle.main.decode("resorts.json")
+
+	@State var sorting = ResortSorting.default
+
+	private var sortedResorts: [Resort] {
+		switch sorting {
+		case .default:
+			return resorts
+		case .alphabetical:
+			return self.resorts.sorted { $0.name < $1.name }
+		case .byCountry:
+			return self.resorts.sorted { $0.country < $1.country }
+		}
+	}
 
 	var body: some View {
        NavigationView {
-			List(resorts) { resort in
+		VStack {
+		Picker("", selection: $sorting) {
+			Text("default").tag(ResortSorting.default)
+			Text("by alphabetical").tag(ResortSorting.alphabetical)
+			Text("by country").tag(ResortSorting.byCountry)
+		}
+		.pickerStyle(SegmentedPickerStyle())
+		.padding()
+			List(sortedResorts) { resort in
 				NavigationLink(destination: ResortView(resort: resort)) {
 					Image(resort.country)
 						.resizable()
@@ -43,6 +69,7 @@ struct ContentView: View {
 						.foregroundColor(.red)
 				}
 			}
+		}
 			.navigationBarTitle("Resorts")
 
 		 	WelcomeView()

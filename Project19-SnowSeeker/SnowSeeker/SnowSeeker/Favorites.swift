@@ -15,11 +15,24 @@ final class Favorites: ObservableObject {
     // the key we're using to read/write in UserDefaults
     private let saveKey = "Favorites"
 
-    init() {
-        // load our saved data
+	private var archiveURL: URL {
+		getDocumentsDirectory()
+			.appendingPathComponent(saveKey)
+			.appendingPathExtension("plist")
+	}
 
-        // still here? Use an empty array
-        self.resorts = []
+	private func getDocumentsDirectory() -> URL {
+		let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+		return paths[0]
+	}
+
+    init() {
+		self.resorts = []
+		guard let data = try? Data(contentsOf: archiveURL) else { return }
+		let decoder = PropertyListDecoder()
+		if let resorts = try? decoder.decode(Set<String>.self, from: data) {
+			self.resorts = resorts
+		}
     }
 
     // returns true if our set contains this resort
@@ -42,6 +55,13 @@ final class Favorites: ObservableObject {
     }
 
     func save() {
-        // write out our data
+       let encoder = PropertyListEncoder()
+		guard let resorts = try? encoder.encode(self.resorts) else { return }
+		do {
+			try resorts.write(to: archiveURL, options: .noFileProtection)
+		}
+		catch {
+			assertionFailure(error.localizedDescription)
+		}
     }
 }
